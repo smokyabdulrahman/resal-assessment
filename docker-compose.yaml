@@ -1,0 +1,20 @@
+version: '3.7'  
+services:
+  message.queue:
+    image: rabbitmq:3-management
+    container_name: message.queue
+    ports:
+      - 5672:5672
+      - 8080:8080
+  app:
+    build:
+      context: .
+    depends_on:
+      - message.queue
+    environment:
+      - MQ_URL=message.queue
+      - MQ_USER=guest
+      - MQ_PASS=guest
+      - MQ_PORT=5672
+    ports:
+      - "8000:80"
