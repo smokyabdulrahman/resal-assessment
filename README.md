@@ -3,6 +3,11 @@
 # Introduction
 This project is for Resal's interview assessment.  
 I have implemented an API that takes a list of products (csv format) and returns the top rated product.  
+You will find to branches other that __main__:
+* feature-1 -> for the first requirement.
+* feature-2 -> for the second requirement.
+
+main will have the lates code, in this case feature-2's code.
 
 # How to start the service?
 I have created a docker-compose file so that you can start up the stack easily.
