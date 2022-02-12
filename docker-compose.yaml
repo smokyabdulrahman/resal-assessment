@@ -1,16 +1,18 @@
 version: '3.7'  
 services:
   message.queue:
-    image: rabbitmq:3-management
-    container_name: message.queue
-    ports:
-      - 5672:5672
-      - 8080:8080
+    image: rabbitmq:3
+    healthcheck:
+      test: rabbitmq-diagnostics -q ping
+      interval: 30s
+      timeout: 30s
+      retries: 3
   app:
     build:
       context: .
     depends_on:
-      - message.queue
+      message.queue:
+        condition: service_healthy
     environment:
       - MQ_URL=message.queue
       - MQ_USER=guest
